@@ -1,6 +1,7 @@
-# Todoist Premium Personal
+# Todoist Replica Project
+> A deep-dive reproduction of Todoist, focused on implementing premium features and complex data sync with Notion API.
 
-A personal task management application built with Next.js, Prisma, and Tailwind CSS, featuring Notion integration.
+A personal task management application built with Next.js and Tailwind CSS, featuring seamless Notion integration.
 
 ## Getting Started
 
@@ -10,24 +11,17 @@ A personal task management application built with Next.js, Prisma, and Tailwind 
     npm install
     ```
 
-2.  **Set up the database:**
-
-    ```bash
-    npx prisma generate
-    npx prisma migrate dev
-    ```
-
-3.  **Run the development server:**
+2.  **Run the development server:**
 
     ```bash
     npm run dev
     ```
 
-4.  Open [http://localhost:3000](http://localhost:3000) with your browser.
+3.  Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 ## Notion Integration
 
-This project supports syncing tasks and projects to Notion Databases. To use this feature, you need to set up Notion Databases with specific properties.
+This project syncs tasks and projects with Notion Databases. To get started, you need to set up two Notion Databases (Tasks and Projects) with specific properties and a relation between them.
 
 ### Quick Setup (CSV Import)
 
@@ -45,7 +39,16 @@ The easiest way to set up your Notion Databases is to import the provided CSV te
 2.  Import it into Notion.
 3.  Copy the Database ID and paste it into the **Projects Database ID** field in Settings.
 
+**⚠️ Important: Manual Relation Setup**
+After importing both CSVs, you **must** manually add a Relation property:
+1.  In your **Tasks** database, add a new property named `Project`.
+2.  Set the type to **Relation**.
+3.  Select your **Projects** database.
+4.  (Optional) Enable "Show on Projects" to see tasks within each project in Notion.
+
 ### Manual Setup
+
+If you prefer to set up the databases manually, use the following property names and types:
 
 **Tasks Database:**
 | Property Name | Property Type | Description |
@@ -55,6 +58,7 @@ The easiest way to set up your Notion Databases is to import the provided CSV te
 | **Priority** | Select | Options: `P1`, `P2`, `P3`, `P4`. |
 | **Date** | Date | The start and end date of the task. |
 | **Description** | Text (Rich Text) | Additional details about the task. |
+| **Project** | Relation | Link to the Projects database. |
 
 **Projects Database:**
 | Property Name | Property Type | Description |
@@ -64,9 +68,10 @@ The easiest way to set up your Notion Databases is to import the provided CSV te
 
 ### Environment Variables
 
-You can also configure the Notion settings via `.env` file for development:
+You can also configure the Notion settings via a `.env` file:
 
 ```env
 NOTION_API_KEY=your_secret_key
 NOTION_TASK_DB_ID=your_database_id
+NOTION_PROJECT_DB_ID=your_project_database_id
 ```
