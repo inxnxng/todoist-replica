@@ -4,6 +4,8 @@ import { fetchProjectsFromNotion, fetchTasksFromNotion } from '@/lib/notion';
 import { addDays, endOfDay, format, startOfDay } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
+export const revalidate = 60; // 60초마다 데이터 갱신
+
 export default async function UpcomingPage() {
   const now = new Date();
 

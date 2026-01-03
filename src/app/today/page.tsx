@@ -3,6 +3,8 @@ import TaskList from '@/components/TaskList';
 import { fetchProjectsFromNotion, fetchTasksFromNotion } from '@/lib/notion';
 import { endOfDay, startOfDay } from 'date-fns';
 
+export const revalidate = 60; // 60초마다 데이터 갱신
+
 export default async function TodayPage() {
   const now = new Date();
   const todayStart = startOfDay(now);

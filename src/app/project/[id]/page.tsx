@@ -2,6 +2,8 @@ import ProjectClientView from '@/components/project/ProjectClientView';
 import { fetchProjectsFromNotion, fetchTasksFromNotion } from '@/lib/notion';
 import { notFound } from 'next/navigation';
 
+export const revalidate = 60; // 60초마다 데이터 갱신
+
 interface ProjectPageProps {
   params: Promise<{
     id: string;

@@ -1,5 +1,7 @@
 import { Tag } from 'lucide-react';
 
+export const revalidate = 60; // 60초마다 데이터 갱신
+
 export default async function FiltersLabelsPage() {
   // Label support temporarily removed with Notion migration
   const labels: any[] = [];
